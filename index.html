@@ -23,7 +23,7 @@
         <ul>
           <li v-for="toread in bookList" class="list">
             <input type="checkbox" v-model="toread.done" />
-            <img src="/assets/read.png" alt="vector image of book under a light">
+            <img src="/assets/read.png" alt="">
 
             <span :class="{done:toread.done}">{{toread.text}}</span>
           </li>
