@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Chelsea+Market&family=Patrick+Hand&family=Slabo+27px&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://kit.fontawesome.com/a6deab4c82.js"></script>
+    <title>Vue To Do</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>{{header}}</h1>
+      <div class="listWrapper">
+        <input
+          type="text"
+          class="book-input input"
+          placeholder="Add a book"
+          v-on:keyup.enter="addBook"
+        />
+        <ul>
+          <li v-for="toread in bookList" class="list">
+            <input type="checkbox" v-model="toread.done" />
+            <img src="/assets/read.png" alt="vector image of book under a light">
+
+            <span :class="{done:toread.done}">{{toread.text}}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </body>
+
+  <style>
+    ul,
+    li,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    figure,
+    p,
+    span,
+    a {
+      padding: 0;
+      margin: 0;
+    }
+
+    body {
+      height: 100vh;
+      background: url("assets/book.jpg");
+      background-size: 100px 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #app {
+      background: rgba(255, 255, 255, 0.85);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      align-items: center;
+      max-width: 1280px;
+      width: 65%;
+      margin: 0 auto;
+      height: 60vh;
+      border-radius: 10px;
+    }
+
+    h1 {
+      font-family: "Chelsea Market", cursive;
+      text-align: center;
+      font-size: 2.5rem;
+    }
+
+    .listWrapper {
+      max-height: 20vh;
+      display: flex;
+      justify-content: space-around;
+      flex-direction: column;
+    }
+
+    .listWrapper li {
+      margin: 20px 0;
+      font-family: "Patrick Hand", cursive;
+      font-size: 2rem;
+      color: chocolate;
+    }
+
+    .listWrapper img {
+        height: 40px;
+        width: 40px;
+    }
+    .done {
+      text-decoration: line-through;
+      color: silver;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    input {
+      font-size: 2rem;
+      font-family: "Patrick Hand", cursive;
+      color: salmon;
+      border-radius: 4px;
+      border: 2px dashed salmon;
+      text-align: center;
+    }
+  </style>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <script>
+    new Vue({
+      el: "#app",
+      data: {
+        header: "📚BRUNCH, but make it books, Book Club 🥞",
+        bookList: [
+          { text: "Vue for Dummies", done: false, suggestor: "Nadine", id: 1 },
+          { text: "Why We Sleep", done: false, suggestor: "Miral", id: 2 },
+          { text: "A Little Life", done: false, suggestor: "Reem", id: 3 },
+        ],
+        test: "reem",
+      },
+      methods: {
+        addName: function (e) {
+          const name = e.target.value;
+        },
+        addBook: function (e) {
+          const book = e.target.value;
+          console.log(book);
+          this.bookList.push({ text: book, done: false, suggestor: "Reem" });
+
+          // this clears out the form after the book has been added to the DOM
+          e.target.value = "";
+        },
+        removeBook: function (id) {
+          this.bookList = this.bookList.filter((toRead) => {
+            console.log(toRead.id);
+            toRead.id !== id;
+          });
+        },
+      },
+    });
+  </script>
+</html>
